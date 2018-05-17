@@ -9,11 +9,13 @@ public class UserInfo {
 	private String name;
 	private String address;
 	private String password;
-	private int mNumber;
+	private String mNumber;
 	private String email;
 	
-	
-	public UserInfo(String name, String address, String password, int mNumber, String email) {
+	public UserInfo(){
+		
+	}
+	public UserInfo(String name, String address, String password, String mNumber, String email) {
 		this.name = name;
 		this.address = address;
 		this.password = password;
@@ -54,10 +56,10 @@ public class UserInfo {
 		this.password = password;
 	}
 	@XmlElement
-	public int getmNumber() {
+	public String getmNumber() {
 		return mNumber;
 	}
-	public void setmNumber(int mNumber) {
+	public void setmNumber(String mNumber) {
 		this.mNumber = mNumber;
 	}
 	
