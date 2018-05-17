@@ -32,6 +32,7 @@ public class UserData {
 		      System.out.println("Connected database successfully...");
 		      System.out.println("Inserting records into the table...");
 		      String sql = "insert into user values(?,?,?,?,?)";
+		      //String logintable = "insert into login values(?,?)";
 		      stmt = conn.prepareStatement(sql);
 		      stmt.setString(1, User.getName());
 		      stmt.setString(2,User.getAddress());
