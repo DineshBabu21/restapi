@@ -11,6 +11,7 @@ public class UserData {
 	Connection conn = null;
 	PreparedStatement stmt=null;
 	ResultSet rs =null;
+	
 	public int SaveData(UserInfo User){
 		try{
 			  Class.forName(JDBC_DRIVER);
@@ -54,6 +55,7 @@ public class UserData {
 		}
 		
 	}
+	
 	public int UpdateData(UserInfo User){
 	
 		try{
@@ -93,8 +95,7 @@ public class UserData {
 		 System.err.println("Got an exception!");
 	      System.err.println(e.getMessage());
 	      return 0;
-	}
-		
+	}	
 	}
 	
 	public int UpdatePassword(UserInfo User){
@@ -133,8 +134,7 @@ public class UserData {
 		 System.err.println("Got an exception!");
 	      System.err.println(e.getMessage());
 	      return 0;
-	}
-		
+	}	
 	}
 	
 	
@@ -206,9 +206,7 @@ public class UserData {
 		    	  stmt.close();
 		    	  rs.close();
 		    	  return 1;  
-		      }
-		      
-		      
+		      }      
 		}
 		catch (Exception e)
 		{
@@ -217,5 +215,42 @@ public class UserData {
 	      return 0;
 	}
 	}
+	
+	
+	public UserInfo LoginUser(UserInfo User){
+		UserInfo us = null;
+		try{
+			  Class.forName(JDBC_DRIVER);
+			  System.out.println("Connecting to a selected database...");
+		      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+		      String UserCheck = "select * from user where email=? and password=?";
+		      stmt = conn.prepareStatement(UserCheck);
+		      stmt.setString(1, User.getEmail());
+		      stmt.setString(2, User.getPassword() );
+		      System.out.println("Query to be executed "+stmt.toString());
+		      rs= stmt.executeQuery();
+		      if(rs.next())
+		      {
+		    	  us= new UserInfo(rs.getString("name"),rs.getString("address"),rs.getString("password"),rs.getString("mnumber"),rs.getString("email"));
+		    	  conn.close();
+		    	  stmt.close();
+		    	  rs.close();
+		    	  return us;
+		      }
+		      else
+		      {
+		      conn.close();
+	    	  stmt.close();
+	    	  rs.close();
+		      return us;
+		      }
+		 
+		}catch (Exception e)
+		{
+			 System.err.println("Got an exception!");
+		      System.err.println(e.getMessage());
+		      return us;
+		}
 		
+	}
 }

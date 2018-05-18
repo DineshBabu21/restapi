@@ -134,4 +134,28 @@ public class User {
 		}
 		
 	}
+	
+	@POST
+	@Path("/Login")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public Response userLogin(UserInfo User)
+	{
+		Response.ResponseBuilder rBuilder=null;
+		Response response=null;
+		System.out.println("Inside UpdatePassword");
+		UserData us = new UserData();
+		UserInfo result=us.LoginUser(User);
+		
+		if(result!=null)
+		{
+			UserResponse UR = new UserResponse(result,1);
+			return Response.ok(UR).build(); 
+		}
+		else
+		{
+			UserResponse UR = new UserResponse(result,0);
+			return Response.ok(UR).build();  
+		}
+	}
 }
