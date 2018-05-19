@@ -2,6 +2,7 @@ package com.dinesh.shopping.commonservice.database;
 
 import com.dinesh.shopping.commonservice.resources.UserInfo;
 import java.sql.*;
+
 public class UserData {
 
 	static String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
